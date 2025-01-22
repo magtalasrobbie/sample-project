@@ -2,6 +2,7 @@
 import * as React from "react";
 import { useState } from "react";
 import clsx from "clsx";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Home() {
   //state
@@ -62,54 +63,60 @@ export default function Home() {
       filter === "active"
         ? uncompletedItems
         : filter === "completed"
-        ? completedItems
-        : list;
+          ? completedItems
+          : list;
 
     return showList.map((todo, index) => (
       <div
         key={index}
-        className="group items-center justify-between border-b-[1px] h-16 flex gap-3 p-5"
+        className="lg:text-base text-xs text-gray-500 dark:text-gray-400 bg-white dark:bg-slate-800 font-bold  group w-full border-b-[1px] dark:border-gray-600 rounded-t-lg"
       >
-        <div className="flex gap-3 items-center">
+        <div className="flex gap-3 p-5 items-center">
           <input
             type="checkbox"
             checked={todo.completed}
             onChange={checkboxChange(index)}
           ></input>
-          <p className="text-sm">{todo.title}</p>
+          <p className="flex-1 truncate">{todo.title}</p>
+          <button
+            className="w-5 hidden group-hover:block"
+            onClick={() => onDelete(index)}
+          >
+            X
+          </button>
         </div>
-        <button
-          className="hidden group-hover:inline"
-          onClick={() => onDelete(index)}
-        >
-          X
-        </button>
       </div>
     ));
   };
 
   return (
-    <main>
-      <div className="components flex flex-col gap-3 items-center  h-screen">
-        <div className="flex items-center">
-          <h1 className="text-4xl align font-bold tracking-[0.8rem] py-10">
-            TODO
-          </h1>
+    <main className="text-xs h-screen min-h-max transition ease-in-out bg-gray-300 dark:bg-gray-950">
+      <header className="w-full relative bg-slate-400 dark:bg-gray-900 top-0 left-0 h-[200px] px-5">
+        <div className="py-10 flex flex-col gap-3 items-center z-10">
+          <div className="flex max-w-[550px] w-full items-center justify-between pb-7">
+            <h1 className="lg:pt-5 text-2xl lg:text-5xl text-white dark:text-gray-200 font-bold tracking-[0.8rem]">
+              TODO
+            </h1>
+            <ThemeToggle />
+          </div>
+          <div className="max-w-[550px] w-full bg-white dark:bg-slate-800 h-16 flex gap-3 p-5 shadow-md rounded-md">
+            <input type="checkbox" disabled></input>
+            <input
+              className="lg:text-base w-full dark:text-gray-300 bg-white dark:bg-slate-800"
+              placeholder="Create a new Todo.."
+              type="text"
+              value={newTodo}
+              onChange={change}
+              onKeyDown={submit}
+            />
+          </div>
         </div>
-        <div className="h-16 flex gap-3 p-5 shadow-md rounded-lg">
-          <input type="checkbox" disabled></input>
-          <input
-            className="text-sm"
-            placeholder="Create a new Todo.."
-            type="text"
-            value={newTodo}
-            onChange={change}
-            onKeyDown={submit}
-          />
-        </div>
-        <div className="flex flex-col min-w-9xl shadow-md rounded-lg">
+      </header>
+
+      <section className="relative -top-2 lg:top-7 px-5">
+        <div className="lg:text-sm dark:text-gray-300 bg-white dark:bg-slate-800 max-w-[550px] w-full mx-auto shadow-md rounded-md mb-10">
           {listComponent ? listComponent() : null}
-          <div className="flex gap-20 p-5 text-gray-400 min-h-md shadow-md rounded-lg">
+          <div className="flex justify-between gap-20 p-5 text-gray-400 min-h-md">
             <p>
               {uncompletedItems.length}{" "}
               {uncompletedItems.length === 1 ? "item" : "items"} left
@@ -117,7 +124,7 @@ export default function Home() {
             <div className="flex gap-2">
               <a
                 className={clsx("hover:cursor-pointer font-bold", {
-                  "text-sky-700": filter === "all",
+                  "text-sky-600": filter === "all",
                 })}
                 onClick={() => setFilter("all")}
               >
@@ -148,7 +155,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }
