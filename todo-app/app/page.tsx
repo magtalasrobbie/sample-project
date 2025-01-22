@@ -9,10 +9,7 @@ export default function Home() {
 
   const [filter, setFilter] = useState("all");
 
-  const [list, setList] = useState([
-    { title: "Eat", completed: false },
-    { title: "Clean", completed: true },
-  ]);
+  const [list, setList] = useState<{ title: string; completed: boolean }[]>([]);
   const [newTodo, setNewTodo] = useState("");
 
   //derived values
