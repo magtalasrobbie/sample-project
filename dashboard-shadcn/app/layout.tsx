@@ -1,4 +1,7 @@
 import { AppSidebar } from "@/components/app-sidebar";
+import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
+import { Button } from "@/components/ui/button";
+import { Sun, Search } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
 import {
@@ -32,10 +35,33 @@ export default function RootLayout({
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset>
-            <header className="flex h-16 shrink-0 items-center gap-2 px-4">
-              <SidebarTrigger className="-ml-1 shadow-sm border-[1px] me-2" />
-              <Separator orientation="vertical" className="mr-2 h-4" />
-              <NavMenu />
+            <header className="flex justify-between h-16 shrink-0 items-center gap-2 px-4">
+              <div className="flex items-center">
+                <SidebarTrigger className="-ml-1 shadow-sm border-[1px] me-2" />
+                <Separator orientation="vertical" className="mr-2 h-4" />
+                <NavMenu />
+              </div>
+              <div className="flex items-center gap-3">
+                <Button
+                  variant="ghost"
+                  className="border border-neutral-200 text-neutral-500 font-normal py-[-1px] px-1 text-left hover:text-black hover:bg-white"
+                >
+                  <Search />
+                  <p className="w-[15rem]">Search</p>
+                </Button>
+                <Button size="icon" variant="ghost" className="rounded-full">
+                  <Sun />
+                </Button>
+                <Button
+                  size="icon"
+                  variant="secondary"
+                  className="rounded-full"
+                >
+                  <Avatar>
+                    <AvatarFallback className="h-3 w-3">CN</AvatarFallback>
+                  </Avatar>
+                </Button>
+              </div>
             </header>
             {children}
           </SidebarInset>
