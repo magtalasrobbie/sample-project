@@ -1,16 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar";
-import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
-import { Button } from "@/components/ui/button";
-import { Sun, Search } from "lucide-react";
 
-import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
-
-import { NavMenu } from "@/components/nav";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 import type { Metadata } from "next";
 
@@ -43,36 +33,7 @@ export default function RootLayout({
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset>
-            <header className="flex h-16 shrink-0 items-center gap-2 px-4">
-              <SidebarTrigger className="mr-2 shadow-sm border-[1px]" />
-              <Separator orientation="vertical" className="h-6" />
-              <NavMenu />
-              <div className="flex ml-auto items-center gap-3">
-                <Button
-                  variant="ghost"
-                  className="border h-8 bg-gray-50 border-slate-200 text-slate-500 font-normal px-1 text-left hover:text-black hover:bg-white"
-                >
-                  <Search className="ml-1" />
-                  <p className="w-[11rem]">Search</p>
-                  <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                    <span className="text-xs">⌘</span>K
-                  </kbd>
-                </Button>
-                <Button size="icon" variant="ghost" className="rounded-full">
-                  <Sun />
-                </Button>
-                <Button
-                  size="icon"
-                  variant="secondary"
-                  className="rounded-full"
-                >
-                  <Avatar>
-                    <AvatarFallback className="h-3 w-3">CN</AvatarFallback>
-                  </Avatar>
-                </Button>
-              </div>
-            </header>
-            {children}
+            <main>{children}</main>
           </SidebarInset>
         </SidebarProvider>
       </body>
