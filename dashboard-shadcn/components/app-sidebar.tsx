@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import {
   LayoutDashboard,
   ClipboardCheck,
@@ -25,6 +27,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarFooter,
+  SidebarRail,
 } from "@/components/ui/sidebar";
 
 const data = {
@@ -55,17 +58,17 @@ const data = {
 const items = [
   {
     title: "Dashboard",
-    url: "#",
+    url: "/",
     icon: LayoutDashboard,
   },
   {
     title: "Tasks",
-    url: "#",
+    url: "/tasks",
     icon: ClipboardCheck,
   },
   {
     title: "Apps",
-    url: "#",
+    url: "/apps",
     icon: Boxes,
   },
   {
@@ -94,10 +97,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -108,6 +111,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>
+      <SidebarRail />
     </Sidebar>
   );
 }
